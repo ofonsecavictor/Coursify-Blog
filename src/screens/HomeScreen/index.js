@@ -9,8 +9,6 @@ export function HomeScreen() {
             <Header/>
             <ScrollView style={{flex:1, backgroundColor: '#fff'}}>
             <Categories/>
-            <Categories/>
-            <Categories/>
             <Baseboard/>
             </ScrollView>
         </View>

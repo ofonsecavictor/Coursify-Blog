@@ -14,7 +14,7 @@ export function Categories () {
 
     useEffect(() => {
       api
-        .get('/wp-json/wp/v2/categories/82')
+        .get('/wp-json/wp/v2/categories/')
         .then(response => setCategories(response.data))
         .catch(err => {
           console.error('ops! ocorreu um erro' + err);
@@ -23,7 +23,7 @@ export function Categories () {
 
       useEffect(() => {
         api
-          .get('/wp-json/wp/v2/posts?categories=82')
+          .get('/wp-json/wp/v2/posts')
           .then(response => setPosts(response.data))
           .catch(err => {
             console.error('ops! ocorreu um erro' + err);
@@ -41,9 +41,11 @@ export function Categories () {
 
     return (
         <ScrollView style={{width: '100%', height: '100%'}}>
+           {categories.map((category, id) => {
+          return (
            <View>
         <View style={styles.titlecontainer}>
-             <Text  style={styles.title}>{categories.name}</Text>
+             <Text  style={styles.title}>{category.name}</Text>
              <TouchableOpacity>
              <Text>VER MAIS</Text>
              </TouchableOpacity>
@@ -68,7 +70,6 @@ export function Categories () {
                 );
               })}
                     <Text style={styles.subtitle}>{posts.title.rendered}</Text>
-                    
                         <HTML numberOfLines={4} html={posts.excerpt.rendered} style={styles.description}/>
                         <TouchableOpacity>
                         <Text style={styles.more}>Leia mais</Text>
@@ -78,6 +79,8 @@ export function Categories () {
              })}
         </ScrollView>
                        </View>
+                                       );
+                                      })}
 
         </ScrollView>
     )
