@@ -20,6 +20,8 @@ export const styles = StyleSheet.create({
         height:325,
         borderRadius:12,
         marginLeft: 15,
+        borderWidth:1,
+        borderColor:'#f0f0f0'
         
     },
     image:{
@@ -31,20 +33,19 @@ export const styles = StyleSheet.create({
         fontSize:17,
         marginLeft:9,
         textAlign: 'left',
-        fontWeight:'bold',
-        color:'#2AB598',
+        fontWeight:'bold',        color:'#2AB598',
     },
     description:{
         fontSize:15,
         marginLeft:10,
         textAlign: 'left',
         marginTop:16,
+        marginBottom:-30,
     },
     more:{
         color:'#FDA506',
         fontSize:16,
         marginLeft:10,
-        marginTop:15,
         fontWeight:'bold',
     }
 })

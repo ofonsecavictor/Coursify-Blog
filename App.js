@@ -6,8 +6,9 @@ export default function App() {
   return (
     <View style={{flex: 1}}>
 <StatusBar
-   backgroundColor="transparent"
+   backgroundColor="white"
    translucent={true}
+   barStyle = "dark-content" 
 />
       <MainStack />
     </View>

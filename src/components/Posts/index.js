@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text,Image, TouchableOpacity,ScrollView } from 'react-native';
 import {styles} from './styles';
-import api from '../config/api';
+import api from '../../config/api';
 
 export function Posts () {
     const [posts, setPosts] = useState ([])

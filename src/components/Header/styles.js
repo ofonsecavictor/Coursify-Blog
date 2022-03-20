@@ -2,9 +2,7 @@ import {StyleSheet} from 'react-native'
 
 export const styles = StyleSheet.create({
     container:{
-    height: 64,
     width:'100%',
-    marginTop:30,
     justifyContent: 'center',
     backgroundColor:'#fff',
     shadowColor: "#000",
@@ -13,14 +11,12 @@ export const styles = StyleSheet.create({
         height: 1,
     },
     shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    
-    elevation: 10,
-    
-
+    shadowRadius: 1.22,
+    elevation: 3,
     },
 
     logo:{
+        marginTop:25,
         marginLeft:17,
     }
 })

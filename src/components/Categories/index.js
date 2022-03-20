@@ -1,25 +1,29 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text,Image, TouchableOpacity,ScrollView } from 'react-native';
+import {View, Text, Image, TouchableOpacity,ScrollView } from 'react-native';
 import {styles} from './styles';
-import api from '../config/api';
+import api from '../../config/api';
+import {useNavigation} from '@react-navigation/native';
+import HTML from 'react-native-renders-html';
 
 
 export function Categories () {
+  const navigation = useNavigation();
     const [categories, setCategories] = useState ([])
     const [posts, setPosts] = useState ([])
     const [media, setMedia] = useState ([])
+
     useEffect(() => {
-        api
-          .get('/wp-json/wp/v2/categories')
-          .then(response => setCategories(response.data))
-          .catch(err => {
-            console.error('ops! ocorreu um erro' + err);
-          });
-      }, []);
+      api
+        .get('/wp-json/wp/v2/categories/82')
+        .then(response => setCategories(response.data))
+        .catch(err => {
+          console.error('ops! ocorreu um erro' + err);
+        });
+    }, []);
 
       useEffect(() => {
         api
-          .get('/wp-json/wp/v2/posts')
+          .get('/wp-json/wp/v2/posts?categories=82')
           .then(response => setPosts(response.data))
           .catch(err => {
             console.error('ops! ocorreu um erro' + err);
@@ -28,7 +32,7 @@ export function Categories () {
 
       useEffect(() => {
         api
-          .get('/wp-json/wp/v2/media')
+          .get('/wp-json/wp/v2/media/?include=5053')
           .then(response => setMedia(response.data))
           .catch(err => {
             console.error('ops! ocorreu um erro' + err);
@@ -37,33 +41,44 @@ export function Categories () {
 
     return (
         <ScrollView style={{width: '100%', height: '100%'}}>
-        {categories.map((item, index) => {
-          return (
-                                          <View>
+           <View>
         <View style={styles.titlecontainer}>
-             <Text key={item.name} style={styles.title}>{item.name}</Text>
-                    <Text>VER MAIS</Text>
+             <Text  style={styles.title}>{categories.name}</Text>
+             <TouchableOpacity>
+             <Text>VER MAIS</Text>
+             </TouchableOpacity>
             </View>
 
             <ScrollView horizontal={true}>
-        {posts.map((item, id) => {
+        {posts.map((posts, id) => {
           return (
-                    <View style={styles.contentcontainer}>
-                    <Text key={id} style={styles.subtitle}> {item.title.rendered}</Text>
-                        <Text style={styles.description}>{item.excerpt.rendered}</Text>
-                        <View>
-                <Image style={styles.image} source={item.id} />
-                </View>
+                    <TouchableOpacity key={id} style={styles.contentcontainer} 
+                    onPress = {() => navigation.navigate('PostsDetails', 
+                    {id: posts.id, 
+                    title:posts.title.rendered, 
+                    media: posts.featured_media, 
+                    content:posts.content.rendered})
+                    }>
+
+{media.map((media) => {
+          return (
+                <Image style={{width: 235, height:103, borderTopRightRadius: 12,borderTopLeftRadius: 12}}source={{ uri: media.media_details.sizes.medium.source_url || '' }}
+
+                />
+                );
+              })}
+                    <Text style={styles.subtitle}>{posts.title.rendered}</Text>
+                    
+                        <HTML numberOfLines={4} html={posts.excerpt.rendered} style={styles.description}/>
                         <TouchableOpacity>
                         <Text style={styles.more}>Leia mais</Text>
                        </TouchableOpacity>
-                       </View>
+                       </TouchableOpacity>
          );
              })}
         </ScrollView>
                        </View>
-                                  );
-                                })}
+
         </ScrollView>
     )
 }
