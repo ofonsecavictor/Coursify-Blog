@@ -1,7 +1,9 @@
 import React from 'react';
-import {View, Text, Image} from'react-native';
+import {View, Text, Image, Linking} from'react-native';
 import { styles } from './styles';
 import {Button} from '../../components/Button';
+
+
 export function Baseboard () {
     return (
         <View style={styles.container}>
@@ -9,7 +11,8 @@ export function Baseboard () {
             <Text style={styles.text}>O Coursify.me é uma plataforma de ensino a distância,{'\n'} 
                 onde qualquer pessoa ou empresa pode construir seu{'\n'}  
                 EAD e vender cursos pela internet.</Text>
-                <Button title="ENTRAR"/>
+                <Button onPress={() => Linking.openURL("https://coursify.me/?locale=pt-BR")}
+  title="Quero conhecer a plataforma!"/>
 
         </View>
     )

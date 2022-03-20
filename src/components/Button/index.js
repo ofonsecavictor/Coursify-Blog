@@ -5,7 +5,7 @@ import {styles} from './styles'
 export function Button ({title, props, ...rest}) {
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity {...rest}style={styles.button}>
             <Text style={styles.title}>{title}</Text>
             </TouchableOpacity>
         </View>
