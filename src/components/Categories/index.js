@@ -11,7 +11,7 @@ export function Categories () {
     const [categories, setCategories] = useState ([])
     const [posts, setPosts] = useState ([])
 
-    useEffect((id) => {
+    useEffect(() => {
       api
         .get('/wp-json/wp/v2/categories')
         .then(response => setCategories(response.data))
@@ -20,7 +20,7 @@ export function Categories () {
         });
     }, []);
 
-      useEffect((id) => {
+      useEffect(() => {
         api
           .get('/wp-json/wp/v2/posts?_embed')
           .then(response => setPosts(response.data))
